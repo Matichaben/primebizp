@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page - Secretarial and Registration Services</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: teal;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .header {
+            margin-bottom: 30px;
+        }
+
+        .header img {
+            max-width: 100px;
+            display: block;
+            margin: 0 auto 10px;
+        }
+
+        .header h1 {
+            font-size: 36px;
+            margin: 0;
+        }
+
+        .content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .text {
+            flex: 1;
+            padding: 20px;
+            font-size: 50px;
+            opacity: 0;
+            animation: fadeIn 3s forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .image-slider {
+            flex: 1;
+            padding: 20px;
+            position: relative;
+        }
+
+        .slider-img {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 15px;
+            display: none;
+        }
+
+        .slider-img.active {
+            display: block;
+        }
+
+        .slider-dots {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+        }
+
+        .dot {
+            height: 15px;
+            width: 15px;
+            margin: 0 5px;
+            background-color: white;
+            border-radius: 50%;
+            display: inline-block;
+            opacity: 0.5;
+            cursor: pointer;
+        }
+
+        .dot.active {
+            opacity: 1;
+        }
+
+        .get-started-btn {
+            display: inline-block;
+            background-color: white;
+            color: teal;
+            padding: 15px 30px;
+            margin: 20px 0;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .get-started-btn:hover {
+            background-color: #004d4d;
+            color: white;
+        }
+
+        .get-started-btn:after {
+            content: "↓";
+            position: absolute;
+            right: -25px;
+            font-size: 24px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .get-started-btn:hover:after {
+            right: -30px;
+            color: white;
+        }
+
+        .reviews {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .review-content {
+            height: 150px;
+        }
+
+        .review {
+            background-color: teal;
+            color: white;
+            border-radius: 15px;
+            padding: 20px;
+            font-size: 16px;
+            text-align: left;
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            animation: fadeIn 1s forwards;
+        }
+
+        .review.active {
+            display: flex;
+        }
+
+        .stars {
+            margin-top: 10px;
+        }
+
+        .stars i {
+            color: yellow;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            <img src="logo.jpg" alt="Logo">
+            <h1>PrimeBiz Registrars</h1>
+        </div>
+
+        <!-- Paragraph and Image Slider Section -->
+        <div class="content">
+            <div class="text">
+                Welcome to our secretarial and registration services. We offer expert assistance to ensure all your business needs are met efficiently and professionally.
+            </div>
+            <div class="image-slider">
+                <img src="land.jpg" alt="Person with Laptop and Books" class="slider-img active">
+                <img src="land2.jpg" alt="Business Meeting" class="slider-img">
+                <img src="land.jpg" alt="Discussion" class="slider-img">
+                <div class="slider-dots">
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- "Let's Get Started Here" Button -->
+        <a href="Menge menge & associaton.php" class="get-started-btn">Let's Get Started Here</a>
+
+        <!-- Reviews Section -->
+        <div id="reviews" class="reviews">
+            <h2 style="color: teal;">What Our Customers Say</h2>
+            <div class="review-content">
+                <div class="review active" id="review1">
+                    "Amazing service, very professional!" - Jane Doe
+                    <div class="stars">
+                        ★★★★☆
+                    </div>
+                </div>
+                <div class="review" id="review2">
+                    "Quick and efficient, highly recommend!" - John Smith
+                    <div class="stars">
+                        ★★★★★
+                    </div>
+                </div>
+                <div class="review" id="review3">
+                    "They took care of everything, stress-free!" - Sarah Johnson
+                    <div class="stars">
+                        ★★★★☆
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Image Slider Logic
+        const sliderImages = document.querySelectorAll('.slider-img');
+        const dots = document.querySelectorAll('.dot');
+        let currentImage = 0;
+
+        function showNextImage() {
+            sliderImages[currentImage].classList.remove('active');
+            dots[currentImage].classList.remove('active');
+            currentImage = (currentImage + 1) % sliderImages.length;
+            sliderImages[currentImage].classList.add('active');
+            dots[currentImage].classList.add('active');
+        }
+
+        setInterval(showNextImage, 3000); // Change image every 3 seconds
+
+        // Reviews Logic
+        const reviews = document.querySelectorAll('.review');
+        let currentReview = 0;
+
+        function showNextReview() {
+            reviews[currentReview].classList.remove('active');
+            currentReview = (currentReview + 1) % reviews.length;
+            reviews[currentReview].classList.add('active');
+        }
+
+        setInterval(showNextReview, 3000); // Change review every 3 seconds
+    </script>
+</body>
+</html>
